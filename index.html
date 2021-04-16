@@ -5,48 +5,135 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap-->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">-->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 
 <body>
     <header>
+        <nav class="navbar sticky-top navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+        </nav>
 
     </header>
     <main>
-        <div class="container-fluid">
-            <div class="container">
-                <div class="row d-flex flex-column">
-                    <div class="col d-flex justify-content-center mt-3">
-                        <h1>CALCULO DEL TIEMPO VIVIDO</h1>
-                    </div>
-                    <div class="col d-flex justify-content-center mt-2">
-                        Teclea tu fecha de nacimiento
-                    </div>
+        <div class="container">
+            <div class="row d-flex flex-column">
+                <div class="col d-flex justify-content-center mt-3">
+                    <h1>CALCULO DEL TIEMPO VIVIDO</h1>
                 </div>
-                <div class="row mt-5">
-                    <div class="col">
-                        <div class="input-group d-flex justify-content-center flex-column">
-                            <div class="d-flex flex-row col-8 mb-3">
-                                <span class="input-group-text">Día</span>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="d-flex flex-row col-8 mb-3">
-                                <span class="input-group-text">Mes</span>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="d-flex flex-row col-8 mb-3">
-                                <span class="input-group-text">Año</span>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
+                <div class="col d-flex justify-content-center mt-2">
+                    Teclea tu fecha de nacimiento
                 </div>
-
-
             </div>
+
+            <form class="row row-cols-lg-auto row-cols-sm-auto g-3 justify-content-center align-items-center mt-3"
+                action="">
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-text" for="nombre">Nombre</div>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-text" for="dia">Dia</div>
+                        <input type="text" class="form-control" id="dia" name="dia">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-text" for="mes">Mes</div>
+                        <input type="text" class="form-control" id="mes" name="mes">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-text" for="anio">Año</div>
+                        <input type="text" class="form-control" id="anio" name="anio">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <div class="input-group-text" for="hora">Hora</div>
+                        <input type="text" class="form-control" id="hora" name="hora">
+                        <select class="form-select" id="sistemaHorario">
+                            <option selected value="am">AM</option>
+                            <option value="pm">PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Calcular</button>
+                </div>
+            </form>
+            <div class="row mt-4 justify-content-center align-items-center gy-4">
+                <div class="col-lg-7">
+                    <h2> "Nombre" actualmente tienes "edad en años" y naciste un "dia de nacimiento" </h2>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En meses: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En semanas: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En días: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En horas: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En minutos: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En segundos: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 ">
+                    <div class="input-group">
+                        <label for="cantidadMeses" class="input-group-text">En milisegundos: </label>
+                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="container d-flex justify-content-center">
+            <span class="text-muted">Footer</span>
+        </div>
+    </footer>
+
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>-->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
