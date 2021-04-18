@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Tiempo Vivido</title>
 </head>
 
 <body>
@@ -71,59 +71,57 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-secondary">Calcular</button>
+                    <button type="button" class="btn btn-secondary" onclick="calcular()">Calcular</button>
                 </div>
             </form>
             <div class="row mt-4 justify-content-center align-items-center gy-4">
-                <div class="col-lg-7 col-12">
-                    <h3> "Nombre" actualmente tienes "edad en años" y naciste un "dia de nacimiento" </h3>
-                </div>
+                <div class="col-lg-7 col-12" id="mostrarNombreEdad"></div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadMeses" class="input-group-text">En meses: </label>
-                        <input type="text" class="form-control" id="cantidadMeses" name="cantidadMeses">
+                        <input type="text" class="form-control resultados" id="cantidadMeses" name="cantidadMeses">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadSemanas" class="input-group-text">En semanas: </label>
-                        <input type="text" class="form-control" id="cantidadSemanas" name="cantidadSemanas">
+                        <input type="text" class="form-control resultados" id="cantidadSemanas" name="cantidadSemanas">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadDias" class="input-group-text">En días: </label>
-                        <input type="text" class="form-control" id="cantidadDias" name="cantidadDias">
+                        <input type="text" class="form-control resultados" id="cantidadDias" name="cantidadDias">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadHoras" class="input-group-text">En horas: </label>
-                        <input type="text" class="form-control" id="cantidadHoras" name="cantidadHoras">
+                        <input type="text" class="form-control resultados" id="cantidadHoras" name="cantidadHoras">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadMinutos" class="input-group-text">En minutos: </label>
-                        <input type="text" class="form-control" id="cantidadMinutos" name="cantidadMinutos">
+                        <input type="text" class="form-control resultados" id="cantidadMinutos" name="cantidadMinutos">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadSegundos" class="input-group-text">En segundos: </label>
-                        <input type="text" class="form-control" id="cantidadSegundos" name="cantidadSegundos">
+                        <input type="text" class="form-control resultados" id="cantidadSegundos" name="cantidadSegundos">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadMsegundos" class="input-group-text">En milisegundos: </label>
-                        <input type="text" class="form-control" id="cantidadMsegundos" name="cantidadMsegundos">
+                        <input type="text" class="form-control resultados" id="cantidadMsegundos" name="cantidadMsegundos">
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    
+
     <footer class="footer">
         <div class="container d-flex justify-content-center">
             <span class="text-muted">Footer</span>
@@ -133,6 +131,7 @@
     <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>-->
+    <script src="js/script.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 
