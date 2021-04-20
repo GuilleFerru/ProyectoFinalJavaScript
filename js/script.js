@@ -57,34 +57,42 @@ function segundosVividos(persona) {
 }
 
 function msegundosVividos(persona) {
-    while (new Date(sessionStorage.getItem('hoy')) <= new Date()){
+    while (new Date(sessionStorage.getItem('hoy')) <= new Date()) {
         return (milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (1000));
     }
 
 }
 
-function cumple(dia, mes) {
-    let hoy = fechaActual();
-    anio = hoy.getFullYear();
+function cumple(persona) {
+    let anio = new Date(sessionStorage.getItem('hoy')).getFullYear();
 
-    let fechaCumple = new Date(anio, mes - 1, dia);
-    let dias = (milisegundos(fechaCumple, hoy) / (3600000 * 24));
+    let h3Cumple = document.createElement('h3');
+    h3Cumple.setAttribute('id', 'mostrarCumpleH3');
 
-    if (dias < 0) {
-        fechaCumple = new Date(anio + 1, mes - 1, dia);
-        dias = (milisegundos(fechaCumple, hoy) / (3600000 * 24));
+    let fechaCumple = new Date(anio, persona.fechaNacimiento().getMonth(), persona.fechaNacimiento().getDate());
+    fechaCumple.setHours(0, 0, 0, 0);
+    let hoy = new Date(sessionStorage.getItem('hoy'))
+    hoy.setHours(0, 0, 0, 0);
+    let diasParaCumple = Math.floor((milisegundos(fechaCumple, hoy) / (3600000 * 24)));
+
+    if (diasParaCumple < 0) {
+        fechaCumple = new Date(anio + 1, persona.fechaNacimiento().getMonth(), persona.fechaNacimiento().getDate());
+        diasParaCumple = Math.floor((milisegundos(fechaCumple, hoy) / (3600000 * 24)));
     }
-    switch (dias) {
+    switch (diasParaCumple) {
         case 0: {
-            alert("Y hoy es su cumple!! Feliz cumpleaños");
+            h3Cumple.innerHTML = 'Hoy es tu cumpleaños! <strong>FELIZ CUMPLE!!!</strong>';
+            mostrarCumpleanios.appendChild(h3Cumple);
             break;
         }
         case 1: {
-            alert("Y falta " + dias + " dia para su cumpleaños!");
+            h3Cumple.innerHTML = `Falta ${diasParaCumple} día para tu cumpleaños!!`;
+            mostrarCumpleanios.appendChild(h3Cumple);
             break;
         }
         default: {
-            alert("Y faltan " + dias + " dias para su cumpleaños!!");
+            h3Cumple.innerHTML = `Faltan ${diasParaCumple} días para tu cumpleaños!!`;
+            mostrarCumpleanios.appendChild(h3Cumple);
             break;
         }
     }
@@ -92,9 +100,13 @@ function cumple(dia, mes) {
 
 function borrar() {
     let mostrarNombreEdad = document.getElementById('mostrarNombreEdad');
-    if (mostrarNombreEdad.hasChildNodes()) {
-        let borrar = document.getElementById('mostrarNombreEdadH3');
-        borrar.parentNode.removeChild(borrar);
+    let mostrarCumpleanios = document.getElementById('mostrarCumpleanios');
+
+    if (mostrarNombreEdad.hasChildNodes() || mostrarCumpleanios.hasChildNodes()) {
+        let borrarNombreEdad = document.getElementById('mostrarNombreEdadH3');
+        let borrarCumple = document.getElementById('mostrarCumpleH3');
+        borrarNombreEdad.parentNode.removeChild(borrarNombreEdad);
+        borrarCumple.parentNode.removeChild(borrarCumple);
         for (let i = 0; i < document.getElementsByClassName('resultados').length; i++) {
             document.getElementsByClassName('resultados')[i].value = ''
         }
@@ -103,11 +115,10 @@ function borrar() {
 
 
 function escribir(persona) {
-    let container = document.createElement('h3');
-    console.log(JSON.parse(sessionStorage.getItem(persona.id)).nombre)
-    container.setAttribute('id', 'mostrarNombreEdadH3');
-    container.innerHTML = `${persona.nombre} actualmente tienes ${aniosVividos(persona)} años y naciste un ${diaSemana(persona)}`;
-    mostrarNombreEdad.appendChild(container);
+    let h3Edad = document.createElement('h3');
+    h3Edad.setAttribute('id', 'mostrarNombreEdadH3');
+    h3Edad.innerHTML = `${persona.nombre} actualmente tienes ${aniosVividos(persona)} años y naciste un ${diaSemana(persona)}`;
+    mostrarNombreEdad.appendChild(h3Edad);
     document.getElementById('cantidadMeses').value = mesesVividos(persona);
     document.getElementById('cantidadSemanas').value = semanasVividas(persona);
     document.getElementById('cantidadDias').value = diasVividos(persona);
@@ -115,8 +126,7 @@ function escribir(persona) {
     document.getElementById('cantidadMinutos').value = minutosVividos(persona);
     document.getElementById('cantidadSegundos').value = segundosVividos(persona);
     document.getElementById('cantidadMsegundos').value = msegundosVividos(persona);
-
-
+    cumple(persona);
 }
 
 let id = 0;
@@ -135,7 +145,7 @@ function calcular() {
     escribir(persona);
 }
 
-
+//console.dir(document.getElementById('nombre'))
 /*for (const persona of personas) {
     if (persona.anio < 1970) {
         alert("No se puede calcular lo solicitado sobre la persona " + persona.id);
