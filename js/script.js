@@ -11,7 +11,7 @@ class Persona {
 
     fechaNacimiento() {
         let nacimiento = new Date(this.anio, this.mes - 1, this.dia, this.hora);
-        console.log(nacimiento)
+        //console.log(nacimiento)
         return nacimiento;
     }
 }
@@ -57,9 +57,7 @@ function segundosVividos(persona) {
 }
 
 function msegundosVividos(persona) {
-    while (new Date(sessionStorage.getItem('hoy')) <= new Date()) {
-        return (milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (1000));
-    }
+    return (milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()));
 
 }
 
@@ -119,6 +117,12 @@ function escribir(persona) {
     h3Edad.setAttribute('id', 'mostrarNombreEdadH3');
     h3Edad.innerHTML = `${persona.nombre} actualmente tienes ${aniosVividos(persona)} años y naciste un ${diaSemana(persona)}`;
     mostrarNombreEdad.appendChild(h3Edad);
+    cumple(persona);
+
+}
+
+function tiempoVivido() {
+    sessionStorage.setItem('hoy', fechaActual());
     document.getElementById('cantidadMeses').value = mesesVividos(persona);
     document.getElementById('cantidadSemanas').value = semanasVividas(persona);
     document.getElementById('cantidadDias').value = diasVividos(persona);
@@ -126,24 +130,46 @@ function escribir(persona) {
     document.getElementById('cantidadMinutos').value = minutosVividos(persona);
     document.getElementById('cantidadSegundos').value = segundosVividos(persona);
     document.getElementById('cantidadMsegundos').value = msegundosVividos(persona);
-    cumple(persona);
+
 }
 
 let id = 0;
+const persona = new Persona();
 function calcular() {
-    let nombre = document.getElementById('nombre').value;
+    /*let nombre = document.getElementById('nombre').value;
     let dia = document.getElementById('dia').value;
     let mes = document.getElementById('mes').value;
     let anio = document.getElementById('anio').value;
     let hora = document.getElementById('hora').value;
     let sistemaHorario = document.getElementById('sistemaHorario').value;
-    const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);
+    const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);*/
+    persona.id = id;
+    persona.nombre = document.getElementById('nombre').value;
+    persona.dia = document.getElementById('dia').value;
+    persona.mes = document.getElementById('mes').value;
+    persona.anio = document.getElementById('anio').value;
+    persona.hora = document.getElementById('hora').value;
+    persona.sistemaHorario = document.getElementById('sistemaHorario').value;
+    //const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);
     id++;
     sessionStorage.setItem('hoy', fechaActual());
-    sessionStorage.setItem(persona.id, JSON.stringify(persona));
+    //sessionStorage.setItem(persona.id, JSON.stringify(persona));
+    console.log(persona)
     borrar();
     escribir(persona);
 }
+
+//var myVar = setInterval(myTimer, 1000);
+
+/*function myTimer() {
+var d = new Date();
+console.log( d.toLocaleTimeString());
+}*/
+
+//document.getElementById("hora").onmouseleave =function() {calcular()}; 
+document.getElementById("calcular").onclick = function () { calcular(), setInterval(tiempoVivido, 1000) };
+//document.getElementById("calcular").onclick = function() {};
+
 
 //console.dir(document.getElementById('nombre'))
 /*for (const persona of personas) {
