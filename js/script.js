@@ -1,3 +1,8 @@
+window.onload = function () {
+    localStorage.clear()
+    console.log('localStorage cleaned')
+}
+
 class Persona {
     constructor(id, nombre, dia, mes, anio, hora, sistemaHorario) {
         this.id = id;
@@ -29,47 +34,69 @@ function diaSemana(persona) {
 }
 
 function aniosVividos(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (31540000000)));
+    const anios = milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000);
+    const meses = Math.floor((anios - Math.floor(anios)) * 12);
+    let dias = 0;
+    //const mesesEntero = Math.floor(meses);
+    //const diferenciaMeses = meses - mesesEntero;
+    //const meses = Math.abs(persona.mes - fechaActual().getMonth());
+    if (fechaActual().getDate() >= persona.dia) {
+        dias = fechaActual().getDate() - persona.dia;
+    }else{
+        const diasMesAnterior = new Date(fechaActual().getFullYear(),(fechaActual().getMonth()),0).getDate(); //cant de dias del mes anterior
+        //console.log(diasMesAnterior)
+        dias = fechaActual().getDate() + parseInt(diasMesAnterior - fechaActual().getDate()-1);
+        
+    }
+    return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`
+
+    //console.log(fechaActual().getDate())
+    //console.log(anios + ' ' + meses + ' ' + dias)
+
+    //console.log(anioEntero + ' '+ mesesEntero)
+
+
 }
 
 function mesesVividos(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (2628000000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (2628000000)));
 }
 
 function semanasVividas(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (604800000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (604800000)));
 }
 
 function diasVividos(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (86400000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (86400000)));
 }
 
 function horasVividas(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (3600000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (3600000)));
 }
 
 function minutosVividos(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (60000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (60000)));
 }
 
 function segundosVividos(persona) {
-    return Math.floor((milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()) / (1000)));
+    return Math.floor((milisegundos(fechaActual(), persona.fechaNacimiento()) / (1000)));
 }
 
 function msegundosVividos(persona) {
-    return (milisegundos(new Date(sessionStorage.getItem('hoy')), persona.fechaNacimiento()));
+    return (milisegundos(fechaActual(), persona.fechaNacimiento()));
 
 }
 
-function cumple(persona) {
-    let anio = new Date(sessionStorage.getItem('hoy')).getFullYear();
+function cumple() {
+    const persona = buscarPersonas();
+    let anio = fechaActual().getFullYear();
 
     let h3Cumple = document.createElement('h3');
     h3Cumple.setAttribute('id', 'mostrarCumpleH3');
 
     let fechaCumple = new Date(anio, persona.fechaNacimiento().getMonth(), persona.fechaNacimiento().getDate());
     fechaCumple.setHours(0, 0, 0, 0);
-    let hoy = new Date(sessionStorage.getItem('hoy'))
+    let hoy = fechaActual()
     hoy.setHours(0, 0, 0, 0);
     let diasParaCumple = Math.floor((milisegundos(fechaCumple, hoy) / (3600000 * 24)));
 
@@ -96,6 +123,19 @@ function cumple(persona) {
     }
 }
 
+function buscarPersonas() {
+
+    for (let i = 0; i < localStorage.length; i++) {
+        let clave = localStorage.key(i);
+        let item = localStorage.getItem(clave);
+        let personaNueva = JSON.parse(item);
+        //console.log(personaNueva.fechaNacimiento())
+        const persona = new Persona(personaNueva.id, personaNueva.nombre, personaNueva.dia, personaNueva.mes, personaNueva.anio, personaNueva.hora, personaNueva.sistemaHorario);
+        //console.log(persona)
+        return persona;
+    }
+}
+
 function borrar() {
     let mostrarNombreEdad = document.getElementById('mostrarNombreEdad');
     let mostrarCumpleanios = document.getElementById('mostrarCumpleanios');
@@ -112,17 +152,19 @@ function borrar() {
 }
 
 
-function escribir(persona) {
+function escribir() {
+    const persona = buscarPersonas();
     let h3Edad = document.createElement('h3');
     h3Edad.setAttribute('id', 'mostrarNombreEdadH3');
-    h3Edad.innerHTML = `${persona.nombre} actualmente tienes ${aniosVividos(persona)} años y naciste un ${diaSemana(persona)}`;
+    h3Edad.innerHTML = aniosVividos(persona);
     mostrarNombreEdad.appendChild(h3Edad);
-    cumple(persona);
+    cumple();
 
 }
 
 function tiempoVivido() {
-    sessionStorage.setItem('hoy', fechaActual());
+    //localStorage.setItem('hoy', fechaActual());
+    const persona = buscarPersonas();
     document.getElementById('cantidadMeses').value = mesesVividos(persona);
     document.getElementById('cantidadSemanas').value = semanasVividas(persona);
     document.getElementById('cantidadDias').value = diasVividos(persona);
@@ -133,30 +175,42 @@ function tiempoVivido() {
 
 }
 
+const guardar = (clave, valor) => { localStorage.setItem(clave, valor) }
+
 let id = 0;
-const persona = new Persona();
-function calcular() {
-    /*let nombre = document.getElementById('nombre').value;
+//const persona = new Persona();
+function cargarDatos() {
+    let nombre = document.getElementById('nombre').value;
     let dia = document.getElementById('dia').value;
     let mes = document.getElementById('mes').value;
     let anio = document.getElementById('anio').value;
     let hora = document.getElementById('hora').value;
     let sistemaHorario = document.getElementById('sistemaHorario').value;
-    const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);*/
-    persona.id = id;
-    persona.nombre = document.getElementById('nombre').value;
-    persona.dia = document.getElementById('dia').value;
-    persona.mes = document.getElementById('mes').value;
-    persona.anio = document.getElementById('anio').value;
-    persona.hora = document.getElementById('hora').value;
-    persona.sistemaHorario = document.getElementById('sistemaHorario').value;
-    //const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);
+
+
+    if (nombre == '' || dia == '' || mes == '' || anio == '' || hora == '') {
+
+    }
+
+    const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);
+    const enJSON = JSON.stringify(persona);
+    guardar(persona.id, enJSON);
     id++;
-    sessionStorage.setItem('hoy', fechaActual());
-    //sessionStorage.setItem(persona.id, JSON.stringify(persona));
-    console.log(persona)
+    //localStorage.setItem('hoy', fechaActual());
     borrar();
-    escribir(persona);
+    escribir();
+
+    /*persona.id = id;
+        persona.nombre = document.getElementById('nombre').value;
+        persona.dia = document.getElementById('dia').value;
+        persona.mes = document.getElementById('mes').value;
+        persona.anio = document.getElementById('anio').value;
+        persona.hora = document.getElementById('hora').value;
+        persona.sistemaHorario = document.getElementById('sistemaHorario').value;*/
+    //const persona = new Persona(id, nombre, dia, mes, anio, hora, sistemaHorario);
+
+    //localStorage.setItem(persona.id, JSON.stringify(persona));
+
 }
 
 //var myVar = setInterval(myTimer, 1000);
@@ -167,7 +221,8 @@ console.log( d.toLocaleTimeString());
 }*/
 
 //document.getElementById("hora").onmouseleave =function() {calcular()}; 
-document.getElementById("calcular").onclick = function () { calcular(), setInterval(tiempoVivido, 1000) };
+document.getElementById("calcular").onclick = function () { cargarDatos(), setInterval(tiempoVivido, 1) };
+//document.getElementById("calcular").onclick = function () { cargarDatos() }
 //document.getElementById("calcular").onclick = function() {};
 
 
