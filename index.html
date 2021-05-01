@@ -34,45 +34,44 @@
                 </div>
             </div>
 
-            <form class="row row-cols-lg-auto row-cols-sm-auto g-3 justify-content-center align-items-center mt-3"
-                action="">
+            <form class=" row row-cols-lg-auto row-cols-sm-auto g-3 justify-content-center align-items-center mt-3"
+                action="" autocomplete="off">
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="nombre">Nombre</div>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <input type="text" class="form-control entradas" id="nombre" name="nombre"
+                            onclick="checkVacio()" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="dia">Dia</div>
-                        <input type="text" class="form-control" id="dia" name="dia">
+                        <input type="text" class="form-control entradas" id="dia" name="dia">
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="mes">Mes</div>
-                        <input type="text" class="form-control" id="mes" name="mes">
+                        <input type="text" class="form-control entradas" id="mes" name="mes">
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="anio">Año</div>
-                        <input type="text" class="form-control" id="anio" name="anio">
+                        <input type="text" class="form-control entradas" id="anio" name="anio">
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="hora">Hora</div>
-                        <input type="number" class="form-control" id="hora" name="hora">
-                        <select class="form-select" id="sistemaHorario">
-                            <option selected value="am">AM</option>
-                            <option value="pm">PM</option>
-                        </select>
+                        <input type="number" class="form-control entradas" id="hora" name="hora">
+                        <div class="input-group-text" for="sistemaHorario" id="sistemaHorario" style="display: none;">AM</div>
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="button" class="btn btn-secondary" id = "calcular">Calcular</button>
+                    <button type="button" class="btn btn-secondary" id="calcular">Calcular</button>
                 </div>
+
             </form>
             <div class="row mt-4 justify-content-center align-items-center gy-4">
                 <div class="col-lg-7 col-12" id="mostrarNombreEdad"></div>
@@ -109,13 +108,15 @@
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadSegundos" class="input-group-text">En segundos: </label>
-                        <input type="text" class="form-control resultados" id="cantidadSegundos" name="cantidadSegundos">
+                        <input type="text" class="form-control resultados" id="cantidadSegundos"
+                            name="cantidadSegundos">
                     </div>
                 </div>
                 <div class="col-lg-7 col-12 ">
                     <div class="input-group">
                         <label for="cantidadMsegundos" class="input-group-text">En milisegundos: </label>
-                        <input type="text" class="form-control resultados" id="cantidadMsegundos" name="cantidadMsegundos">
+                        <input type="text" class="form-control resultados" id="cantidadMsegundos"
+                            name="cantidadMsegundos">
                     </div>
                 </div>
                 <div class="col-lg-12 col-12 d-flex justify-content-center" id="mostrarCumpleanios"></div>
