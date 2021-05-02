@@ -41,86 +41,116 @@
                         <div class="input-group-text" for="nombre">Nombre</div>
                         <input type="text" class="form-control entradas" id="nombre" name="nombre"
                             onclick="checkVacio()" required>
+                        <div class="invalid-feedback">
+                            Ingrese su nombre!
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="dia">Dia</div>
-                        <input type="text" class="form-control entradas" id="dia" name="dia">
+                        <input type="text" class="form-control entradas" id="dia" name="dia" required>
+                        <div class="invalid-feedback">
+                            Ingrese un valor de 1 a 31
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="mes">Mes</div>
-                        <input type="text" class="form-control entradas" id="mes" name="mes">
+                        <input type="text" class="form-control entradas" id="mes" name="mes" required>
+                        <div class="invalid-feedback">
+                            Ingrese un valor de 1 a 12
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="anio">Año</div>
-                        <input type="text" class="form-control entradas" id="anio" name="anio">
+                        <input type="text" class="form-control entradas" id="anio" name="anio" required>
+                        <div class="invalid-feedback">
+                            Ingrese un año valido
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="input-group">
                         <div class="input-group-text" for="hora">Hora</div>
-                        <input type="number" class="form-control entradas" id="hora" name="hora">
-                        <div class="input-group-text" for="sistemaHorario" id="sistemaHorario" style="display: none;">AM</div>
+                        <input type="number" class="form-control entradas" id="hora" name="hora" required>
+                        <div class="invalid-feedback">
+                            Ingrese un valor de 0 a 23
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto
+                        </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <button type="button" class="btn btn-secondary" id="calcular">Calcular</button>
-                </div>
+        </div>
 
-            </form>
-            <div class="row mt-4 justify-content-center align-items-center gy-4">
-                <div class="col-lg-7 col-12" id="mostrarNombreEdad"></div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadMeses" class="input-group-text">En meses: </label>
-                        <input type="text" class="form-control resultados" id="cantidadMeses" name="cantidadMeses">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadSemanas" class="input-group-text">En semanas: </label>
-                        <input type="text" class="form-control resultados" id="cantidadSemanas" name="cantidadSemanas">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadDias" class="input-group-text">En días: </label>
-                        <input type="text" class="form-control resultados" id="cantidadDias" name="cantidadDias">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadHoras" class="input-group-text">En horas: </label>
-                        <input type="text" class="form-control resultados" id="cantidadHoras" name="cantidadHoras">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadMinutos" class="input-group-text">En minutos: </label>
-                        <input type="text" class="form-control resultados" id="cantidadMinutos" name="cantidadMinutos">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadSegundos" class="input-group-text">En segundos: </label>
-                        <input type="text" class="form-control resultados" id="cantidadSegundos"
-                            name="cantidadSegundos">
-                    </div>
-                </div>
-                <div class="col-lg-7 col-12 ">
-                    <div class="input-group">
-                        <label for="cantidadMsegundos" class="input-group-text">En milisegundos: </label>
-                        <input type="text" class="form-control resultados" id="cantidadMsegundos"
-                            name="cantidadMsegundos">
-                    </div>
-                </div>
-                <div class="col-lg-12 col-12 d-flex justify-content-center" id="mostrarCumpleanios"></div>
+        <div class="row mt-2">
+            <div class="col-12  d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" id="calcular">Calcular</button>
             </div>
+        </div>
+        </form>
+        <div class="row mt-4 justify-content-center align-items-center gy-4">
+            <div class="col-lg-7 col-12" id="mostrarNombreEdad"></div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadMeses" class="input-group-text">En meses: </label>
+                    <input type="text" class="form-control resultados" id="cantidadMeses" name="cantidadMeses">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadSemanas" class="input-group-text">En semanas: </label>
+                    <input type="text" class="form-control resultados" id="cantidadSemanas" name="cantidadSemanas">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadDias" class="input-group-text">En días: </label>
+                    <input type="text" class="form-control resultados" id="cantidadDias" name="cantidadDias">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadHoras" class="input-group-text">En horas: </label>
+                    <input type="text" class="form-control resultados" id="cantidadHoras" name="cantidadHoras">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadMinutos" class="input-group-text">En minutos: </label>
+                    <input type="text" class="form-control resultados" id="cantidadMinutos" name="cantidadMinutos">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadSegundos" class="input-group-text">En segundos: </label>
+                    <input type="text" class="form-control resultados" id="cantidadSegundos" name="cantidadSegundos">
+                </div>
+            </div>
+            <div class="col-lg-7 col-12 ">
+                <div class="input-group">
+                    <label for="cantidadMsegundos" class="input-group-text">En milisegundos: </label>
+                    <input type="text" class="form-control resultados" id="cantidadMsegundos" name="cantidadMsegundos">
+                </div>
+            </div>
+            <div class="col-lg-12 col-12 d-flex justify-content-center" id="mostrarCumpleanios"></div>
+        </div>
         </div>
     </main>
 

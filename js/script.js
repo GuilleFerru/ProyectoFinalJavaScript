@@ -47,7 +47,7 @@ function aniosVividos(persona) {
         dias = fechaActual().getDate() - persona.dia;
     } else {
         const diasMesAnterior = new Date(fechaActual().getFullYear(), (fechaActual().getMonth()), 0).getDate(); //cant de dias del mes anterior
-        console.log(diasMesAnterior)
+        //console.log(diasMesAnterior)
         dias = fechaActual().getDate() + parseInt(diasMesAnterior - persona.dia);
 
     }
@@ -214,51 +214,57 @@ function validar() {
     let anio = document.getElementById('anio');
     let hora = document.getElementById('hora');
     let sistemaHorario = document.getElementById('sistemaHorario');
-    let flag = false;
+    let count = 0;
 
     if (nombre.value == '' || nombre.value == null) {
         esInvalido(nombre);
-        flag = false;
+        count -= 1;
     } else {
         esValido(nombre);
-        flag = true;
+        count += 1;
     }
+
     if (isNaN(dia.value) || dia.value == '' || (dia.value <= 0 || dia.value > 31)) {
         esInvalido(dia);
-        flag = false;
+        count -= 1;
     } else {
         esValido(dia);
-        flag = true;
-
+        count += 1;
     }
+
     if (isNaN(mes.value) || mes.value == '' || (mes.value <= 0 || mes.value > 12)) {
         esInvalido(mes);
-        flag = false;
+        count -= 1;
     } else {
         esValido(mes);
-        flag = true;
+        count += 1;
     }
+
     if (isNaN(anio.value) || anio.value == '') {
         esInvalido(anio);
-        flag = false;
+        count -= 1;
     } else {
         esValido(anio);
-        flag = true;
+        count += 1;
     }
+
     if (isNaN(hora.value) || hora.value == '' || (hora.value < 0 || hora.value > 23)) {
         esInvalido(hora);
-        flag = false;
+        count -= 1;
     } else {
         esValido(hora);
-        flag = true;
+        count += 1;
     }
-    if (flag == true) {
+
+    if (count == 5) {
         const persona = new Persona(id, nombre.value, dia.value, mes.value, anio.value, hora.value);
         const enJSON = JSON.stringify(persona);
         guardar(persona.id, enJSON);
         id++;
         borrar();
         escribir();
+    } else {
+        borrar();
     }
 
 }
