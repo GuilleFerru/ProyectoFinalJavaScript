@@ -5,6 +5,7 @@ window.onload = function () {
 
 let id = 0;
 let intervalo = 0;
+let indiceTabla = 1;
 
 class Persona {
     constructor(id, nombre, dia, mes, anio, hora) {
@@ -183,7 +184,6 @@ function escribir() {
             cumple();
             intervalo = setInterval(tiempoVivido, 1)
         }
-
     }
 }
 
@@ -201,6 +201,34 @@ function tiempoVivido() {
             document.getElementById('cantidadMsegundos').value = msegundosVividos(persona);
         }
     }
+}
+
+function borrarFila(x) {
+    let tr = x.parentNode.parentNode;
+    document.getElementById('tablaPersonas').deleteRow(tr.rowIndex);
+    localStorage.removeItem(tr.id)
+}
+
+
+function llenarTabla(persona) {
+
+    document.getElementById('containerTabla').style.display = 'inherit'
+    let tabla = document.getElementById('bodyTabla');
+    let tr = document.createElement('tr')
+    tr.setAttribute('id', `${persona.id}`)
+    tr.classList.add('filasTabla')
+    tr.innerHTML =
+        `<th scope="row">${i}</th>
+        <td>${persona.nombre}</td>
+        <td>${Math.floor(milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000))}</td>
+        <td>${(persona.fechaNacimiento()).toLocaleDateString()}</td>
+        <td>
+            <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)">
+                <i class="fa fa-times"></i>
+            </button>
+        </td>`
+    tabla.appendChild(tr)
+    indiceTabla++;
 }
 
 const guardar = (clave, valor) => { localStorage.setItem(clave, valor) }
@@ -263,6 +291,7 @@ function validar() {
         id++;
         borrar();
         escribir();
+        llenarTabla(persona);
     } else {
         borrar();
     }
