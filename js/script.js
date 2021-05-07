@@ -203,25 +203,48 @@ function tiempoVivido() {
     }
 }
 
+function comparar() {
+    let checkboxes = document.getElementsByClassName('checkTabla');
+    //console.dir(checkboxes)
+    let checkSelected = [];
+    let contador = 0
+    for (let checkbox of checkboxes) {
+        checkSelected.push(checkbox.checked);
+    }
+    for(let index = 0; index < checkSelected.length; index++){
+        if(checkSelected[index] == true){
+            contador += 1
+        }
+    }
+    if (contador == 2){
+        console.log('ejecuta Modal')
+    }else{
+        console.log('No ejecuta Modal')
+    }
+}
+
 function borrarFila(x) {
     let tr = x.parentNode.parentNode;
     document.getElementById('tablaPersonas').deleteRow(tr.rowIndex);
-    localStorage.removeItem(tr.id)
+    localStorage.removeItem(tr.id);
 }
 
-
 function llenarTabla(persona) {
-
     document.getElementById('containerTabla').style.display = 'inherit'
     let tabla = document.getElementById('bodyTabla');
     let tr = document.createElement('tr')
     tr.setAttribute('id', `${persona.id}`)
     tr.classList.add('filasTabla')
     tr.innerHTML =
-        `<th scope="row">${i}</th>
+        `<th scope="row">${indiceTabla}</th>
         <td>${persona.nombre}</td>
         <td>${Math.floor(milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000))}</td>
         <td>${(persona.fechaNacimiento()).toLocaleDateString()}</td>
+        <td>
+        <div class="form-check">
+            <input class="form-check-input checkTabla" type="checkbox" value=""  onclick="comparar()"> 
+        </div>
+        </td>
         <td>
             <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)">
                 <i class="fa fa-times"></i>
