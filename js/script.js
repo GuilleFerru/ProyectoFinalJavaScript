@@ -223,7 +223,7 @@ $('#cerrarModal').on('click', function () {
 
 function ejecutarModal() {
     var myModal = new bootstrap.Modal(document.getElementById('modalComparar'));
-    $('#modalBody').html('hola puto')
+    $('#modalBody').html('hola ')
 
     myModal.toggle();
 
