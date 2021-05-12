@@ -145,6 +145,7 @@ function buscarPersonas() {
 }
 
 function borrar() {
+
     let mostrarNombreEdad = document.getElementById('mostrarNombreEdad');
     let mostrarCumpleanios = document.getElementById('mostrarCumpleanios');
 
@@ -203,25 +204,47 @@ function tiempoVivido() {
     }
 }
 
-function comparar() {
-    let checkboxes = document.getElementsByClassName('checkTabla');
-    //console.dir(checkboxes)
-    let checkSelected = [];
-    let contador = 0
-    for (let checkbox of checkboxes) {
-        checkSelected.push(checkbox.checked);
-    }
-    for(let index = 0; index < checkSelected.length; index++){
-        if(checkSelected[index] == true){
-            contador += 1
-        }
-    }
-    if (contador == 2){
-        console.log('ejecuta Modal')
-    }else{
-        console.log('No ejecuta Modal')
-    }
+function buscarPersona(id) {
+    let item = localStorage.getItem(id);
+    let personaNueva = JSON.parse(item);
+    const persona = new Persona(personaNueva.id, personaNueva.nombre, personaNueva.dia, personaNueva.mes, personaNueva.anio, personaNueva.hora, personaNueva.sistemaHorario);
+    return persona
 }
+
+// uso de JQuery
+
+$('#cerrarModal').on('click', function () {
+    $('.checkTabla').each(function () {
+        $(this).prop('checked', false);
+        btnBorrar(this.value, false);
+    })
+    personasComparar = [];
+})
+
+function ejecutarModal() {
+    var myModal = new bootstrap.Modal(document.getElementById('modalComparar'));
+    $('#modalBody').html('hola puto')
+
+    myModal.toggle();
+
+}
+const btnBorrar = (fila, valor) => { $(`#btnBorraFila${fila}`).attr('disabled', valor) }
+
+let personasComparar = [];
+$('#bodyTabla').on('click', '.checkTabla', function (e) {
+    if (this.checked && personasComparar.length < 2) {
+        personasComparar.push(buscarPersona(this.value))
+        btnBorrar(this.value, true);
+    }
+    if (personasComparar.length == 2) {
+        $('#nombre').on('focus',checkVacio())
+        ejecutarModal();
+    } else if (this.checked == false) {
+        btnBorrar(this.value, false);
+        personasComparar.pop();
+
+    }
+})
 
 function borrarFila(x) {
     let tr = x.parentNode.parentNode;
@@ -242,11 +265,11 @@ function llenarTabla(persona) {
         <td>${(persona.fechaNacimiento()).toLocaleDateString()}</td>
         <td>
         <div class="form-check">
-            <input class="form-check-input checkTabla" type="checkbox" value=""  onclick="comparar()"> 
+            <input class="form-check-input checkTabla" type="checkbox" value="${persona.id}" id = "cb${persona.id}"> 
         </div>
         </td>
         <td>
-            <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)">
+            <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)" id="btnBorraFila${persona.id}">
                 <i class="fa fa-times"></i>
             </button>
         </td>`
