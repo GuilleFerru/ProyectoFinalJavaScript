@@ -36,30 +36,30 @@ function diaSemana(persona) {
 
 }
 
-function aniosVividos(persona) {
-    const anios = milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000);
-
+/*function compararFechas(fechaUno, fechaDos){
+    const anios = milisegundos(fechaUno, fechaDos) / (31540000000);
     const meses = Math.floor((anios - Math.floor(anios)) * 12);
     let dias = 0;
-    //const mesesEntero = Math.floor(meses);
-    //const diferenciaMeses = meses - mesesEntero;
-    //const meses = Math.abs(persona.mes - fechaActual().getMonth());
+    if (fechaUno.getDate() >= persona.dia) {
+        dias = fechaUno.getDate() - persona.dia;
+    } else {
+        const diasMesAnterior = new Date(fechaUno.getFullYear(), (fechaUno.getMonth()), 0).getDate(); //cant de dias del mes anterior
+        dias = fechaUno.getDate() + parseInt(diasMesAnterior - persona.dia);
+    }
+}*/
+
+function aniosVividos(persona) {
+    const anios = milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000);
+    const meses = Math.floor((anios - Math.floor(anios)) * 12);
+    let dias = 0;
     if (fechaActual().getDate() >= persona.dia) {
         dias = fechaActual().getDate() - persona.dia;
     } else {
         const diasMesAnterior = new Date(fechaActual().getFullYear(), (fechaActual().getMonth()), 0).getDate(); //cant de dias del mes anterior
-        //console.log(diasMesAnterior)
         dias = fechaActual().getDate() + parseInt(diasMesAnterior - persona.dia);
 
     }
-    return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`
-
-    //console.log(fechaActual().getDate())
-    //console.log(anios + ' ' + meses + ' ' + dias)
-
-    //console.log(anioEntero + ' '+ mesesEntero)
-
-
+    return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`;
 }
 
 function mesesVividos(persona) {
@@ -211,6 +211,7 @@ function buscarPersona(id) {
     return persona
 }
 
+
 // uso de JQuery
 
 $('#cerrarModal').on('click', function () {
@@ -222,8 +223,121 @@ $('#cerrarModal').on('click', function () {
 })
 
 function ejecutarModal() {
-    var myModal = new bootstrap.Modal(document.getElementById('modalComparar'));
-    $('#modalBody').html('hola ')
+    let myModal = new bootstrap.Modal(document.getElementById('modalComparar'));
+    let personaMayor = {};
+    let personaMenor = {};
+
+    //persona mayor
+    if (personasComparar[0].fechaNacimiento() < personasComparar[1].fechaNacimiento()) {
+        personaMayor = personasComparar[0];
+        personaMenor = personasComparar[1];
+    } else {
+        personaMayor = personasComparar[1];
+        personaMenor = personasComparar[0];
+    }
+
+    const anios = milisegundos(personaMenor.fechaNacimiento(), personaMayor.fechaNacimiento()) / (31540000000);
+    const meses = Math.floor((anios - Math.floor(anios)) * 12);
+
+    let dias = 0;
+    if (personaMenor.fechaNacimiento().getDate() >= personaMayor.dia) {
+        dias = personaMenor.fechaNacimiento().getDate() - personaMayor.dia;
+    } else {
+        const diasMesAnterior = new Date(personaMenor.fechaNacimiento().getFullYear(), (personaMenor.fechaNacimiento().getMonth()), 0).getDate(); //cant de dias del mes anterior
+        dias = personaMenor.fechaNacimiento().getDate() + parseInt(diasMesAnterior - personaMayor.dia);
+    }
+    function stringDia() {
+        if (dias == 1) {
+            return 'dia'
+        } else {
+            return 'dias'
+        }
+    }
+
+    function stringMes() {
+        if (meses == 1) {
+            return 'mes'
+        } else {
+            return 'meses'
+        }
+    }
+
+
+    let diaSemanaMayor = diaSemana(personaMayor);
+    let diaSemanaMenor = diaSemana(personaMenor);
+    let textoDiaSemana = "";
+
+    if (diaSemanaMayor === diaSemanaMenor) {
+        textoDiaSemana = "Ademas ambos nacieron un " + diaSemanaMenor;
+    } else {
+        textoDiaSemana = `Ademas&nbsp<strong>${personaMayor.nombre}</strong>&nbspnació un ${diaSemana(personaMayor)} y&nbsp<strong>${personaMenor.nombre}</strong>&nbspnació un ${diaSemana(personaMenor)}`
+    }
+
+    let textoInicial = `Sabias que&nbsp<strong>${personaMayor.nombre}</strong>&nbspes mayor que&nbsp<strong>${personaMenor.nombre}</strong>&nbsppor ${Math.floor(anios)} años, ${meses} ${stringMes()} y ${dias} ${stringDia()}.
+                        ${textoDiaSemana}.`
+
+
+    $('#modalBody').html(`
+                        <p class ="text-justify">${textoInicial}</p>
+                        <div class="container">
+                            <div class="table-responsive">
+                                <table class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tiempo vivido</th>
+                                            <th scope="col">${personaMayor.nombre}</th>
+                                            <th scope="col">${personaMenor.nombre}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <label class="control">En meses</label>
+                                            </th>
+                                            <td>${mesesVividos(personaMayor)}</td>
+                                            <td>${mesesVividos(personaMenor)}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label class="control">En semanas</label>
+                                            </th>
+                                            <td>${semanasVividas(personaMayor)}</td>
+                                            <td>${semanasVividas(personaMenor)}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label class="control">En días</label>
+                                            </th>
+                                            <td>${diasVividos(personaMayor)}</td>
+                                            <td>${diasVividos(personaMenor)}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label class="control">En horas</label>
+                                            </th>
+                                            <td>${horasVividas(personaMayor)}</td>
+                                            <td>${horasVividas(personaMenor)}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label class="control">En segundos</label>
+                                            </th>
+                                            <td>${segundosVividos(personaMayor)}</td>
+                                            <td>${segundosVividos(personaMenor)}</td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">
+                                            <label class="control">En ms</label>
+                                            <td>${msegundosVividos(personaMayor)}</td>
+                                            <td>${msegundosVividos(personaMenor)}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>                   
+                        `)
+    let random = Math.floor(Math.random() * (10 - 1)) + 1;
+    $("#avatar").attr("src", `icons/ico_lg_${random}.png`);
 
     myModal.toggle();
 
@@ -237,7 +351,7 @@ $('#bodyTabla').on('click', '.checkTabla', function (e) {
         btnBorrar(this.value, true);
     }
     if (personasComparar.length == 2) {
-        $('#nombre').on('focus',checkVacio())
+        $('#nombre').on('focus', checkVacio())
         ejecutarModal();
     } else if (this.checked == false) {
         btnBorrar(this.value, false);
@@ -258,21 +372,22 @@ function llenarTabla(persona) {
     let tr = document.createElement('tr')
     tr.setAttribute('id', `${persona.id}`)
     tr.classList.add('filasTabla')
-    tr.innerHTML =
-        `<th scope="row">${indiceTabla}</th>
-        <td>${persona.nombre}</td>
-        <td>${Math.floor(milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000))}</td>
-        <td>${(persona.fechaNacimiento()).toLocaleDateString()}</td>
-        <td>
-        <div class="form-check">
-            <input class="form-check-input checkTabla" type="checkbox" value="${persona.id}" id = "cb${persona.id}"> 
-        </div>
-        </td>
-        <td>
-            <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)" id="btnBorraFila${persona.id}">
-                <i class="fa fa-times"></i>
-            </button>
-        </td>`
+    tr.innerHTML = `
+                    <th scope="row">${indiceTabla}</th>
+                        <td>${persona.nombre}</td>
+                        <td>${Math.floor(milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000))}</td>
+                        <td>${(persona.fechaNacimiento()).toLocaleDateString()}</td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input checkTabla" type="checkbox" value="${persona.id}" id = "cb${persona.id}"> 
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm px-3" onclick="borrarFila(this)" id="btnBorraFila${persona.id}">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </td>
+                    `;
     tabla.appendChild(tr)
     indiceTabla++;
 }
@@ -331,7 +446,7 @@ function validar() {
     }
 
     if (count == 5) {
-        const persona = new Persona(id, nombre.value, dia.value, mes.value, anio.value, hora.value);
+        const persona = new Persona(id, nombre.value.charAt(0).toUpperCase() + nombre.value.slice(1), dia.value, mes.value, anio.value, hora.value);
         const enJSON = JSON.stringify(persona);
         guardar(persona.id, enJSON);
         id++;

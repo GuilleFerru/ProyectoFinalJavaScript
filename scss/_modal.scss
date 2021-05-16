@@ -1,0 +1,21 @@
+.modal-box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal-box:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.custom-table thead tr,
+.custom-table thead th {
+    border-top: none;
+    border-bottom: none !important;
+}
+
+.custom-table tbody th,
+.custom-table tbody td {
+    color: #777;
+    font-weight: 400;
+    font-weight: 300;
+}

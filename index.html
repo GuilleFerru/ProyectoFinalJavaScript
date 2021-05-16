@@ -177,30 +177,32 @@
 
     </main>
 
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalComparar">
-        Launch demo modal
-    </button> -->
+    <div class="modal-box">
+        <div class="modal fade" id="modalComparar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-spinner">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title " id="exampleModalLabel">Te dejo algunas comparaciones interesantes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalComparar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-body">
+                        <div class="row d-flex align-content-center">
+                            <div class="col-3 text-center">
+                                <img alt="IMG of Avatars" class="img-fluid z-depth-1-half rounded-circle" id="avatar">
+                            </div>
+                            <div class="col-9" id="modalBody">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
+                            id="cerrarModal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <footer class="footer">
         <div class="container d-flex justify-content-center">
             <span class="text-muted">Footer</span>
