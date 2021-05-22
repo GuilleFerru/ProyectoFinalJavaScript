@@ -1,0 +1,36 @@
+.headerContainer {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.headerClima {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: center;
+
+}
+
+#climaIcono {
+    display: flex;
+    justify-content: center;
+}
+
+.headerContainer img {
+    //background: white;
+    width: 30%;
+    height: auto;
+}
+
+#clima{
+    margin: auto;
+}
+
+@media only screen and (max-width: 520px) {
+    .headerContainer img {
+        //background: white;
+        width: 100%;
+        height: auto;
+    }
+}

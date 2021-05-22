@@ -3,6 +3,25 @@ window.onload = function () {
     console.log('localStorage cleaned')
 }
 
+$(function () {
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=Cordoba&units=metric&appid=dc4c2c5bd09cf02520edfb88e52c5d8d',
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(data){
+            console.log(data)
+            //const {icon} = data.weather[0];
+            $('#climaIcono').html(`<img src="icons/${data.weather[0].icon}.png"></img>`);
+            $('#clima').html(`Temperatura actual en la ciudad de ${data.name} es de ${data.main.temp}°C.`
+            );
+            
+            
+        }
+    });
+
+});
+
+
 let id = 0;
 let intervalo = 0;
 let indiceTabla = 1;
