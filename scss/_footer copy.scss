@@ -1,0 +1,32 @@
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.footer__logo a img:hover{
+    transform: scale(0.9);
+    transition: 0.3s;
+}
+
+.footer__copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        color: $white;
+    }
+}
+
+.footer__media{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    i{
+        background: $white;
+    }
+    a:hover{
+        transform: scale(0.9);
+        transition: 0.3s;
+    }
+}
+

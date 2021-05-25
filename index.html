@@ -19,19 +19,19 @@
 
 <body>
     <header>
-        <nav class="navbar sticky-top navbar-dark bg-dark ">
+        <nav class="navbar sticky-top navbar-light bg-light ">
             <div class="container-fluid ">
                 <div class="row headerContainer">
-                    <div class="col-2 ">
-                        <img src="icons/logo.png" alt="">
+                    <div class="col-lg-2 col-2 logoContainer">
+                        <img src="icons/logo.png" alt="logo de la web">
                     </div>
-                    <div class="col-10 headerClima ">
-                        <div class="row">
-                            <div id="climaIcono" class="col-3 ">
-                                <img src="icons/unknown.png" alt="">
+                    <div class="col-lg-10 col-10 headerClima">
+                        <div class="row climaContainer">
+                            <div id="climaIcono" class="col-lg-3 col-3">
+                                <img src="icons/unknown.png" alt="icono del tiempo">
                             </div>
-                            <div class="col-9 climaTexto">
-                                <p id="clima" class="text-white-50"></p>
+                            <div class="col-lg-9 col-9" id="climaTexto">
+                                <p id="clima" class="text-white-10"></p>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container">
+    <main class="container-fluid">
+        <div>
             <div class="row d-flex flex-column">
                 <div class="col d-flex justify-content-center mt-3">
                     <h1><strong>CALCULO DEL TIEMPO VIVIDO</strong></h1>
@@ -123,7 +123,10 @@
         </div>
 
         <div class="row mt-4 d-flex justify-content-center align-items-center gy-4">
-            <div class="col-lg-7 col-12 d-flex justify-content-center align-items-center " id="mostrarNombreEdad"></div>
+            <div class="col-lg-7 col-12 d-flex justify-content-center align-items-center " id="mostrarNombreEdad" >
+                <h3 id="mostrarNombreEdadH3" style="display:none"></h3>
+            </div>
+            
             <div class="col-lg-7 col-12 ">
                 <div class="input-group">
                     <label for="cantidadMeses" class="input-group-text">En meses: </label>
@@ -166,7 +169,9 @@
                     <input type="text" class="form-control resultados" id="cantidadMsegundos" name="cantidadMsegundos">
                 </div>
             </div>
-            <div class="col-lg-12 col-12 d-flex justify-content-center" id="mostrarCumpleanios"></div>
+            <div class="col-lg-12 col-12 d-flex justify-content-center" id="mostrarCumpleanios">
+                <h3 id="mostrarCumpleH3" style="display:none"></h3>
+            </div>
         </div>
         <!-- </div> -->
 
@@ -219,7 +224,7 @@
     </div>
     <footer class="footer">
         <div class="container d-flex justify-content-center">
-            <span class="text-muted">Footer</span>
+            <span class="text-muted">© Copyright 2021 Guillermo Ferrucci - Todos los Derechos Reservados</span>
         </div>
     </footer>
 

@@ -1,64 +1,137 @@
 .headerContainer {
   width: 100vw;
   display: flex;
-  align-items: center; }
+  justify-content: center;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
 
 .headerClima {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  text-align: center; }
+  text-align: center;
+}
+
+.climaContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 #climaIcono {
   display: flex;
-  justify-content: center; }
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#climaTexto {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#climaTexto p {
+  margin: auto;
+}
 
 .headerContainer img {
   width: 30%;
-  height: auto; }
-
-#clima {
-  margin: auto; }
+  height: auto;
+}
 
 @media only screen and (max-width: 520px) {
-  .headerContainer img {
+  .headerContainer #climaIcono {
+    display: none;
+  }
+
+  .logoContainer img {
     width: 100%;
-    height: auto; } }
+    height: auto;
+  }
+
+  .climaTexto p {
+    text-align: justify;
+  }
+}
 
 * {
   margin: 0px;
   padding: 0px;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 html {
   position: relative;
   min-height: 100%;
   font-size: 90%;
   /*font-size 10px por defecto*/
-  scroll-behavior: smooth; }
+  scroll-behavior: smooth;
+}
 
 body {
   /*padding-top: 4rem;*/
   font-family: 'Roboto Condensed', sans-serif;
   margin-bottom: 60px;
-  /* Margin bottom by footer height */ }
+  /* Margin bottom by footer height */
+}
+
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.efectoAparecer {
+  animation-duration: 2s;
+  animation-name: aparecer;
+}
+
+
+
+/* .efectoDesaparecer {
+
+  animation-duration: 2s;
+  animation-name: desaparecer;
+}
+
+@keyframes desaparecer {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+} */
 
 .modal-box {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 
 .modal-box:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
 
 .custom-table thead tr,
 .custom-table thead th {
   border-top: none;
-  border-bottom: none !important; }
+  border-bottom: none !important;
+}
 
 .custom-table tbody th,
 .custom-table tbody td {
   color: #777;
   font-weight: 400;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -70,7 +143,8 @@ body {
   /* Set the fixed height of the footer here */
   line-height: 60px;
   /* Vertically center the text there */
-  background-color: #f5f5f5; }
+  background-color: #f5f5f5;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */

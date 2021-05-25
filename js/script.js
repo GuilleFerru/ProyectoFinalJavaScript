@@ -1,24 +1,19 @@
 window.onload = function () {
     localStorage.clear()
-    console.log('localStorage cleaned')
 }
 
+//llamada a la API
 $(function () {
     $.ajax({
         url: 'https://api.openweathermap.org/data/2.5/weather?q=Cordoba&units=metric&appid=dc4c2c5bd09cf02520edfb88e52c5d8d',
         type: 'GET',
         dataType: 'jsonp',
-        success: function(data){
-            console.log(data)
-            //const {icon} = data.weather[0];
+        success: function (data) {
             $('#climaIcono').html(`<img src="icons/${data.weather[0].icon}.png"></img>`);
             $('#clima').html(`Temperatura actual en la ciudad de ${data.name} es de ${data.main.temp}°C.`
             );
-            
-            
         }
     });
-
 });
 
 
@@ -38,7 +33,6 @@ class Persona {
 
     fechaNacimiento() {
         let nacimiento = new Date(this.anio, this.mes - 1, this.dia, this.hora);
-        //console.log(nacimiento)
         return nacimiento;
     }
 }
@@ -78,7 +72,8 @@ function aniosVividos(persona) {
         dias = fechaActual().getDate() + parseInt(diasMesAnterior - persona.dia);
 
     }
-    return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`;
+    $('#mostrarNombreEdadH3').html(`${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`);
+    //return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`;
 }
 
 function mesesVividos(persona) {
@@ -113,12 +108,7 @@ function cumple() {
     let personas = buscarPersonas();
     for (let persona of personas) {
         if (persona.id == (id - 1)) {
-
             let anio = fechaActual().getFullYear();
-
-            let h3Cumple = document.createElement('h3');
-            h3Cumple.setAttribute('id', 'mostrarCumpleH3');
-
             let fechaCumple = new Date(anio, persona.fechaNacimiento().getMonth(), persona.fechaNacimiento().getDate());
             fechaCumple.setHours(0, 0, 0, 0);
             let hoy = fechaActual()
@@ -131,18 +121,15 @@ function cumple() {
             }
             switch (diasParaCumple) {
                 case 0: {
-                    h3Cumple.innerHTML = 'Hoy es tu cumpleaños! <strong>FELIZ CUMPLE!!!</strong>';
-                    mostrarCumpleanios.appendChild(h3Cumple);
+                    $('#mostrarCumpleH3').html('Hoy es tu cumpleaños! <strong>FELIZ CUMPLE!!!</strong>');
                     break;
                 }
                 case 1: {
-                    h3Cumple.innerHTML = `Falta ${diasParaCumple} día para tu cumpleaños!!`;
-                    mostrarCumpleanios.appendChild(h3Cumple);
+                    $('#mostrarCumpleH3').html(`Falta ${diasParaCumple} día para tu cumpleaños!!`);
                     break;
                 }
                 default: {
-                    h3Cumple.innerHTML = `Faltan ${diasParaCumple} días para tu cumpleaños!!`;
-                    mostrarCumpleanios.appendChild(h3Cumple);
+                    $('#mostrarCumpleH3').html(`Faltan ${diasParaCumple} días para tu cumpleaños!!`);
                     break;
                 }
             }
@@ -156,7 +143,6 @@ function buscarPersonas() {
         let clave = localStorage.key(i);
         let item = localStorage.getItem(clave);
         let personaNueva = JSON.parse(item);
-        //console.log(personaNueva.fechaNacimiento())
         const persona = new Persona(personaNueva.id, personaNueva.nombre, personaNueva.dia, personaNueva.mes, personaNueva.anio, personaNueva.hora, personaNueva.sistemaHorario);
         personas.push(persona)
     }
@@ -164,15 +150,9 @@ function buscarPersonas() {
 }
 
 function borrar() {
-
-    let mostrarNombreEdad = document.getElementById('mostrarNombreEdad');
-    let mostrarCumpleanios = document.getElementById('mostrarCumpleanios');
-
-    if (mostrarNombreEdad.hasChildNodes() || mostrarCumpleanios.hasChildNodes()) {
-        let borrarNombreEdad = document.getElementById('mostrarNombreEdadH3');
-        let borrarCumple = document.getElementById('mostrarCumpleH3');
-        borrarNombreEdad.parentNode.removeChild(borrarNombreEdad);
-        borrarCumple.parentNode.removeChild(borrarCumple);
+    if ($('#mostrarNombreEdadH3').html().length > 0 && $('#mostrarCumpleH3').html().length > 0 ) {
+        $('#mostrarNombreEdadH3').slideToggle('slow');
+        $('#mostrarCumpleH3').slideToggle('slow');
         for (let i = 0; i < document.getElementsByClassName('resultados').length; i++) {
             document.getElementsByClassName('resultados')[i].value = ''
         }
@@ -181,7 +161,7 @@ function borrar() {
 
 function checkVacio() {
     let nombre = document.getElementById('nombre').value;
-    if (nombre !== "" || nombre !== null) {
+    if (nombre !== "" && nombre !== null) {
         for (let i = 0; i < document.getElementsByClassName('entradas').length; i++) {
             document.getElementsByClassName('entradas')[i].value = '';
             document.getElementsByClassName('entradas')[i].classList.remove('is-valid')
@@ -192,16 +172,14 @@ function checkVacio() {
     }
 }
 
-
 function escribir() {
     let personas = buscarPersonas();
     for (let persona of personas) {
         if (persona.id == (id - 1)) {
-            let h3Edad = document.createElement('h3');
-            h3Edad.setAttribute('id', 'mostrarNombreEdadH3');
-            h3Edad.innerHTML = aniosVividos(persona);
-            mostrarNombreEdad.appendChild(h3Edad);
+            aniosVividos(persona);
+            $('#mostrarNombreEdadH3').slideToggle('slow');
             cumple();
+            $('#mostrarCumpleH3').slideToggle('slow');
             intervalo = setInterval(tiempoVivido, 1)
         }
     }
@@ -281,7 +259,6 @@ function ejecutarModal() {
         }
     }
 
-
     let diaSemanaMayor = diaSemana(personaMayor);
     let diaSemanaMenor = diaSemana(personaMenor);
     let textoDiaSemana = "";
@@ -294,8 +271,6 @@ function ejecutarModal() {
 
     let textoInicial = `Sabias que&nbsp<strong>${personaMayor.nombre}</strong>&nbspes mayor que&nbsp<strong>${personaMenor.nombre}</strong>&nbsppor ${Math.floor(anios)} años, ${meses} ${stringMes()} y ${dias} ${stringDia()}.
                         ${textoDiaSemana}.`
-
-
     $('#modalBody').html(`
                         <p class ="text-justify">${textoInicial}</p>
                         <div class="container">
@@ -383,10 +358,16 @@ function borrarFila(x) {
     let tr = x.parentNode.parentNode;
     document.getElementById('tablaPersonas').deleteRow(tr.rowIndex);
     localStorage.removeItem(tr.id);
+    if($('#tablaPersonas tr').length == 1){
+        $('#containerTabla').hide('slow');
+    }
 }
 
 function llenarTabla(persona) {
-    document.getElementById('containerTabla').style.display = 'inherit'
+    
+    if($('#tablaPersonas tr').length == 1){
+        $('#containerTabla').show('slow');
+    }
     let tabla = document.getElementById('bodyTabla');
     let tr = document.createElement('tr')
     tr.setAttribute('id', `${persona.id}`)
@@ -408,6 +389,7 @@ function llenarTabla(persona) {
                         </td>
                     `;
     tabla.appendChild(tr)
+    tr.classList.add('efectoAparecer')
     indiceTabla++;
 }
 
@@ -421,7 +403,6 @@ function validar() {
     let mes = document.getElementById('mes');
     let anio = document.getElementById('anio');
     let hora = document.getElementById('hora');
-    let sistemaHorario = document.getElementById('sistemaHorario');
     let count = 0;
 
     if (nombre.value == '' || nombre.value == null) {
@@ -448,7 +429,7 @@ function validar() {
         count += 1;
     }
 
-    if (isNaN(anio.value) || anio.value == '') {
+    if ((isNaN(anio.value) || anio.value == '') || (parseInt(anio.value) >= parseInt(fechaActual().getFullYear()))) {
         esInvalido(anio);
         count -= 1;
     } else {
@@ -469,13 +450,12 @@ function validar() {
         const enJSON = JSON.stringify(persona);
         guardar(persona.id, enJSON);
         id++;
-        borrar();
+        //borrar();
         escribir();
         llenarTabla(persona);
     } else {
-        borrar();
+        //borrar();
     }
-
 }
 
 

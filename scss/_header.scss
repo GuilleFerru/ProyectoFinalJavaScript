@@ -1,7 +1,14 @@
 .headerContainer {
     width: 100vw;
     display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
 }
 
 .headerClima {
@@ -12,9 +19,24 @@
 
 }
 
+.climaContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #climaIcono {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#climaTexto {
+    display: flex;
+    justify-content: flex-start;
+
+    p {
+        margin: auto;
+    }
 }
 
 .headerContainer img {
@@ -23,14 +45,24 @@
     height: auto;
 }
 
-#clima{
-    margin: auto;
-}
+
 
 @media only screen and (max-width: 520px) {
-    .headerContainer img {
+    .headerContainer #climaIcono {
+        //background: white;
+        //width: 100%;
+        //height: auto;
+        display: none;
+    }
+
+    .logoContainer img {
         //background: white;
         width: 100%;
         height: auto;
+    }
+
+    .climaTexto p {
+
+        text-align: justify;
     }
 }
