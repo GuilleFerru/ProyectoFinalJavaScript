@@ -16,7 +16,6 @@ $(function () {
     });
 });
 
-
 let id = 0;
 let intervalo = 0;
 let indiceTabla = 1;
@@ -49,18 +48,6 @@ function diaSemana(persona) {
 
 }
 
-/*function compararFechas(fechaUno, fechaDos){
-    const anios = milisegundos(fechaUno, fechaDos) / (31540000000);
-    const meses = Math.floor((anios - Math.floor(anios)) * 12);
-    let dias = 0;
-    if (fechaUno.getDate() >= persona.dia) {
-        dias = fechaUno.getDate() - persona.dia;
-    } else {
-        const diasMesAnterior = new Date(fechaUno.getFullYear(), (fechaUno.getMonth()), 0).getDate(); //cant de dias del mes anterior
-        dias = fechaUno.getDate() + parseInt(diasMesAnterior - persona.dia);
-    }
-}*/
-
 function aniosVividos(persona) {
     const anios = milisegundos(fechaActual(), persona.fechaNacimiento()) / (31540000000);
     const meses = Math.floor((anios - Math.floor(anios)) * 12);
@@ -73,7 +60,7 @@ function aniosVividos(persona) {
 
     }
     $('#mostrarNombreEdadH3').html(`${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`);
-    //return `${persona.nombre} actualmente tienes ${Math.floor(anios)} años, ${meses} meses y ${dias} dias. Por cierto naciste un ${diaSemana(persona)}`;
+
 }
 
 function mesesVividos(persona) {
@@ -150,7 +137,7 @@ function buscarPersonas() {
 }
 
 function borrar() {
-    if ($('#mostrarNombreEdadH3').html().length > 0 && $('#mostrarCumpleH3').html().length > 0 ) {
+    if ($('#mostrarNombreEdadH3').html().length > 0 && $('#mostrarCumpleH3').html().length > 0) {
         $('#mostrarNombreEdadH3').slideToggle('slow');
         $('#mostrarCumpleH3').slideToggle('slow');
         for (let i = 0; i < document.getElementsByClassName('resultados').length; i++) {
@@ -207,9 +194,6 @@ function buscarPersona(id) {
     const persona = new Persona(personaNueva.id, personaNueva.nombre, personaNueva.dia, personaNueva.mes, personaNueva.anio, personaNueva.hora, personaNueva.sistemaHorario);
     return persona
 }
-
-
-// uso de JQuery
 
 $('#cerrarModal').on('click', function () {
     $('.checkTabla').each(function () {
@@ -358,14 +342,14 @@ function borrarFila(x) {
     let tr = x.parentNode.parentNode;
     document.getElementById('tablaPersonas').deleteRow(tr.rowIndex);
     localStorage.removeItem(tr.id);
-    if($('#tablaPersonas tr').length == 1){
+    if ($('#tablaPersonas tr').length == 1) {
         $('#containerTabla').hide('slow');
     }
 }
 
 function llenarTabla(persona) {
-    
-    if($('#tablaPersonas tr').length == 1){
+
+    if ($('#tablaPersonas tr').length == 1) {
         $('#containerTabla').show('slow');
     }
     let tabla = document.getElementById('bodyTabla');
@@ -458,11 +442,6 @@ function validar() {
     }
 }
 
-
 document.getElementById("calcular").onclick = function () { validar() };
-
-
-
-
 
 /* Alumno: Guillermo Ferrucci */

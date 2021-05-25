@@ -22,8 +22,8 @@
         <nav class="navbar sticky-top navbar-light bg-light ">
             <div class="container-fluid ">
                 <div class="row headerContainer">
-                    <div class="col-lg-2 col-2 logoContainer">
-                        <img src="icons/logo.png" alt="logo de la web">
+                    <div class="col-lg-2 col-2 logoContainer ">
+                        <a href="index.html" id="linkLogo"><img src="icons/logo.png" alt="logo de la web"></a>
                     </div>
                     <div class="col-lg-10 col-10 headerClima">
                         <div class="row climaContainer">
@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </form>
-            <div class="row mt-2">
+            <div class="row mt-4">
                 <div class="col-12  d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" id="calcular">Calcular</button>
                 </div>
@@ -123,10 +123,10 @@
         </div>
 
         <div class="row mt-4 d-flex justify-content-center align-items-center gy-4">
-            <div class="col-lg-7 col-12 d-flex justify-content-center align-items-center " id="mostrarNombreEdad" >
+            <div class="col-lg-7 col-12 d-flex justify-content-center align-items-center " id="mostrarNombreEdad">
                 <h3 id="mostrarNombreEdadH3" style="display:none"></h3>
             </div>
-            
+
             <div class="col-lg-7 col-12 ">
                 <div class="input-group">
                     <label for="cantidadMeses" class="input-group-text">En meses: </label>
@@ -175,16 +175,16 @@
         </div>
         <!-- </div> -->
 
-        <div class="container" id="containerTabla" style="display: none;">
+        <div class="container " id="containerTabla" style="display: none;">
             <div class="table-responsive">
-                <table class="table" id="tablaPersonas">
+                <table class="table mb-3" id="tablaPersonas">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Edad</th>
                             <th scope="col">Nacimiento</th>
-                            <th scope="col">Comparar</th>
+                            <th scope="col" title="Agregue dos personas">Comparar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
@@ -222,11 +222,38 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <br>
+    <footer class="footer mt-auto py-3 bg-light ">
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col">
+
+                </div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    <span class="text-muted text-center">
+                        © Copyright 2021 Guillermo Ferrucci - Todos los Derechos Reservados
+                    </span>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center gap-4">
+                    <a href="https://wa.me/5493571531154" class="" target="_blank">
+                        <i class=""><img src="icons/wsp-ico.png" alt="Whatsapp icon" class=""></i>
+                    </a>
+                    <a href="https://www.instagram.com/guilleferrucci/?hl=es-la" class="" target="_blank">
+                        <i><img src="icons/inst-ico.png" alt="Instagram icon" class=""></i>
+                    </a>
+                    <a href="https://www.facebook.com/guille.ferrucci/" class="" target="_blank">
+                        <i><img src="icons/fb-ico.png" alt="Facebook" class=""></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <footer class="footer">
         <div class="container d-flex justify-content-center">
             <span class="text-muted">© Copyright 2021 Guillermo Ferrucci - Todos los Derechos Reservados</span>
         </div>
-    </footer>
+    </footer> -->
 
     <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
