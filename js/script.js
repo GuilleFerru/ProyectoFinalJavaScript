@@ -16,6 +16,18 @@ $(function () {
     });
 });
 
+
+//post 
+function guardarJson(persona){
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    $.post(url, JSON.stringify(persona), function(respuesta, estado){
+        if(estado === 'success'){
+            console.log('Se guardo persona en API')
+        }
+    })
+
+}
+
 let id = 0;
 let intervalo = 0;
 let indiceTabla = 1;
@@ -381,6 +393,9 @@ const guardar = (clave, valor) => { localStorage.setItem(clave, valor) }
 let esValido = (div) => { div.classList.add('is-valid'), div.classList.remove('is-invalid') }
 let esInvalido = (div) => { div.classList.add('is-invalid'), div.classList.remove('is-valid') }
 
+
+
+
 function validar() {
     let nombre = document.getElementById('nombre');
     let dia = document.getElementById('dia');
@@ -434,6 +449,7 @@ function validar() {
         const enJSON = JSON.stringify(persona);
         guardar(persona.id, enJSON);
         id++;
+        guardarJson(persona);
         //borrar();
         escribir();
         llenarTabla(persona);
