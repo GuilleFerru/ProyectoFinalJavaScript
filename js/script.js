@@ -18,14 +18,13 @@ $(function () {
 
 
 //post 
-function guardarJson(persona){
+function guardarJson(persona) {
     const url = 'https://jsonplaceholder.typicode.com/posts';
-    $.post(url, JSON.stringify(persona), function(respuesta, estado){
-        if(estado === 'success'){
+    $.post(url, JSON.stringify(persona), function (respuesta, estado) {
+        if (estado === 'success') {
             console.log('Se guardo persona en API')
         }
     })
-
 }
 
 let id = 0;
@@ -393,8 +392,14 @@ const guardar = (clave, valor) => { localStorage.setItem(clave, valor) }
 let esValido = (div) => { div.classList.add('is-valid'), div.classList.remove('is-invalid') }
 let esInvalido = (div) => { div.classList.add('is-invalid'), div.classList.remove('is-valid') }
 
-
-
+// Ingresar solo numeros en los inputs
+$(function () {
+    $('.soloNumeros').on('keypress',function (e) {
+        var charCode = (e.which) ? e.which : event.keyCode
+        if (String.fromCharCode(charCode).match(/[^0-9]/g))
+            return false;
+    });
+});
 
 function validar() {
     let nombre = document.getElementById('nombre');
@@ -450,12 +455,9 @@ function validar() {
         guardar(persona.id, enJSON);
         id++;
         guardarJson(persona);
-        //borrar();
         escribir();
         llenarTabla(persona);
-    } else {
-        //borrar();
-    }
+    } 
 }
 
 document.getElementById("calcular").onclick = function () { validar() };
